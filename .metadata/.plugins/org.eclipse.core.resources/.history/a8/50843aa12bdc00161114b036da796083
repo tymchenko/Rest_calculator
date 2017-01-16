@@ -1,0 +1,76 @@
+package rest;
+
+import java.util.Arrays;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/calc")
+public class RestCalcServ {
+	
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	@Path("{name}")
+	public String sayHelloXML(@PathParam("name") String name){
+		String response = "<?xml version='1.0'?>"	
+				+ "<number>" + name + "        " + calculate(parse(name.trim())) + "</number>";
+		return response;
+	}
+
+	private String calculate(String [] params) {
+		int number1 = Integer.parseInt(params[0]);
+//		int number2 = Integer.parseInt(params[2]);
+		
+		String ans = new String();
+//		switch(params[1]){
+//			case "+":
+//				ans = Integer.toString(number1 + number2);
+//			case "-":
+//				ans = Integer.toString(number1 - number2);
+//			case "*":
+//				ans = Integer.toString(number1 * number2);
+//			case "/":
+//				ans = Integer.toString(number1 / number2);
+//		}
+//		return ans;
+		return number1  + params[1] + "here" + params[2];//.toString();
+	}
+
+	private String [] parse(String name) {
+		String number1 = "num ";//getNumber(0, name);
+		String sign = getSign(name);
+		String number2 = getNumber(name.indexOf(sign), name);
+		return new String [] {number1, sign, number2};
+	}
+
+	private String getSign(String name) {
+		for(char sign : name.toCharArray()){
+			if(!Character.isDigit(sign)){
+				return Character.toString(sign);
+			}else{
+				break;
+			}
+		}
+		return "sign";
+		
+	}
+
+	private String getNumber(int i, String name) {
+		String number = new String();
+		char [] nameArr = name.substring(i, name.length()).toCharArray();
+		System.out.println(">>>>>> "+ new String(nameArr));
+		
+		for(char k : nameArr){
+			if(Character.isDigit(k)){
+				number += k;
+			}else{
+				break;
+			}
+		}
+		return number;
+	}
+
+}

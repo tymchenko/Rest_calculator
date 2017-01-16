@@ -1,0 +1,43 @@
+package rest;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/calc")
+public class RestCalcServ {
+	
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	@Path("{name}")
+	public String sayHelloXML(@PathParam("name") String name){
+		String response = calculate(parse(name));
+		return response;
+	}
+
+	private String calculate(String [] params) {
+		int number1 = Integer.parseInt(params[0]);
+		int number2 = Integer.parseInt(params[2]);
+		
+		String ans = new String();
+		switch(params[1]){
+			case "+":
+				ans = Integer.toString(number1 + number2);
+			case "-":
+				ans = Integer.toString(number1 - number2);
+			case "*":
+				ans = Integer.toString(number1 * number2);
+			case "/":
+				ans = Integer.toString(number1 / number2);
+		}
+		return ans;
+	}
+
+	private String [] parse(String name) {
+		
+		return null;
+	}
+
+}

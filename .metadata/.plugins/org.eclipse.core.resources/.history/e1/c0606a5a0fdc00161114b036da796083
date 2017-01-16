@@ -1,0 +1,5 @@
+package ua.java.rest.calc.server;
+
+public class RestCalcServ {
+
+}

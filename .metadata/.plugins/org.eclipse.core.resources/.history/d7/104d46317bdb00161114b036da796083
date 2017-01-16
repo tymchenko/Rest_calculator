@@ -1,0 +1,15 @@
+package book;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+@Path("/book")
+public class Book {
+	
+	@GET
+	public String sayHelo(){
+		String response = null;
+		return response;
+	}
+
+}
